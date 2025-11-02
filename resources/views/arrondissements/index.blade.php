@@ -1,47 +1,117 @@
 <x-app-layout>
-    <div class="p-6 max-w-6xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-blue-700">Liste des arrondissements</h1>
-            <a href="{{ route('arrondissements.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">+ Ajouter</a>
+    <!-- Conteneur Alpine.js pour la gestion du modal de suppression -->
+    <div x-data="{ showModal: false, deleteRoute: '' }" class="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+        
+        <!-- EN-TÊTE : Titre et Bouton d'Action -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 p-4 bg-white rounded-xl shadow-lg border-l-4 border-indigo-500">
+            <h1 class="text-3xl font-extrabold text-gray-800 mb-2 sm:mb-0">
+                Liste des Arrondissements
+            </h1>
+            <a href="{{ route('arrondissements.create') }}" class="w-full sm:w-auto bg-indigo-600 text-white font-semibold px-6 py-2.5 rounded-xl shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-[1.02]">
+                <i class="fas fa-plus mr-2"></i> + Ajouter un Arrondissement
+            </a>
         </div>
 
+        <!-- MESSAGE DE SUCCÈS (Stylisé) -->
         @if(session('success'))
-            <div class="bg-green-100 text-green-700 p-3 rounded mb-4">{{ session('success') }}</div>
+            <div class="bg-green-50 border-l-4 border-green-400 text-green-700 p-4 rounded-lg mb-6 shadow-sm" role="alert">
+                <p class="font-bold">Succès!</p>
+                <p>{{ session('success') }}</p>
+            </div>
         @endif
 
-        <div class="bg-white shadow-md rounded-lg overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead class="bg-gray-100 text-gray-700">
-                    <tr>
-                        <th class="p-3">#</th>
-                        <th class="p-3">Nom</th>
-                        <th class="p-3">Département</th>
-                        <th class="p-3">Commune</th>
-                        <th class="p-3">Chef d’arrondissement</th>
-                        <th class="p-3 text-right">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($arrondissements as $arrondissement)
-                        <tr class="border-b hover:bg-gray-50 transition">
-                            <td class="p-3">{{ $arrondissement->id }}</td>
-                            <td class="p-3">{{ $arrondissement->name }}</td>
-                            <td class="p-3">{{ $arrondissement->departement->name ?? '-' }}</td>
-                            <td class="p-3">{{ $arrondissement->commune->name ?? '-' }}</td>
-                            <td class="p-3">{{ $arrondissement->ca->name ?? '-' }}</td>
-                            <td class="p-3 text-right space-x-2">
-                                <a href="{{ route('arrondissements.edit', $arrondissement) }}" class="text-blue-600 hover:underline">Modifier</a>
-                                <form action="{{ route('arrondissements.destroy', $arrondissement) }}" method="POST" class="inline">
-                                    @csrf @method('DELETE')
-                                    <button onclick="return confirm('Supprimer cet arrondissement ?')" class="text-red-600 hover:underline">Supprimer</button>
-                                </form>
-                            </td>
+        <!-- CONTENEUR DU TABLEAU : Carte Élevée et Débordement Responsif -->
+        <div class="bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-100">
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tl-xl">#</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Département</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Commune</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Chef d’arrondissement</th>
+                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tr-xl">Actions</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach($arrondissements as $arrondissement)
+                            <tr class="hover:bg-indigo-50 transition duration-150 ease-in-out odd:bg-white even:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $arrondissement->id }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold">{{ $arrondissement->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $arrondissement->departement->name ?? '-' }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $arrondissement->commune->name ?? '-' }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $arrondissement->ca->name ?? '-' }}</td>
+                                
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
+                                    <!-- Bouton Modifier -->
+                                    <a href="{{ route('arrondissements.edit', $arrondissement) }}" class="text-indigo-600 hover:text-indigo-800 transition duration-150">
+                                        Modifier
+                                    </a>
+                                    
+                                    <!-- Bouton Supprimer (déclenche le modal) -->
+                                    <button
+                                        @click.prevent="showModal = true; deleteRoute = '{{ route('arrondissements.destroy', $arrondissement) }}'"
+                                        class="text-red-600 hover:text-red-800 transition duration-150"
+                                        title="Supprimer cet arrondissement"
+                                    >
+                                        Supprimer
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- PAGINATION -->
+            <div class="p-4 bg-gray-50 border-t">
+                {{ $arrondissements->links() }}
+            </div>
+        </div>
+        
+        <!-- MODAL DE CONFIRMATION DE SUPPRESSION (Alpine.js) -->
+        <div x-show="showModal"
+             x-transition:enter="ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4"
+             style="display: none;"
+        >
+            <div @click.away="showModal = false"
+                 x-transition:enter="ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave="ease-in duration-200"
+                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 class="bg-white rounded-lg overflow-hidden shadow-xl max-w-lg w-full transform transition-all p-6"
+            >
+                <h3 class="text-xl font-bold text-red-600 border-b pb-3 mb-4">Confirmer la Suppression</h3>
+                
+                <p class="text-gray-700 mb-6">Êtes-vous sûr de vouloir **supprimer définitivement** cet arrondissement ? Cette action est irréversible.</p>
+                
+                <div class="flex justify-end space-x-4">
+                    <!-- Bouton Annuler -->
+                    <button @click="showModal = false" type="button" class="px-4 py-2 bg-gray-200 text-gray-800 font-semibold rounded-lg hover:bg-gray-300 transition duration-150">
+                        Annuler
+                    </button>
+                    
+                    <!-- Bouton Confirmer la Suppression -->
+                    <form x-bind:action="deleteRoute" method="POST" class="inline">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-150">
+                            Supprimer
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
 
-        <div class="mt-4">{{ $arrondissements->links() }}</div>
     </div>
 </x-app-layout>
