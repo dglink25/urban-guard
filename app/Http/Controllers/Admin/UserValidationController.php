@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\UserRejectedMail;
 use App\Mail\UserValidatedMail;
 
-
 class UserValidationController extends Controller{
     public function index(){
         $users = User::where('status', 'pending')->get();

@@ -9,8 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void{
         Schema::table('users', function (Blueprint $table) {
             // Ajout seulement si la colonne n'existe pas déjà
             if (!Schema::hasColumn('users', 'id_departement')) {
