@@ -29,6 +29,7 @@ class CommuneController extends Controller
             'name'           => 'required|string|max:255',
             'id_departement' => 'required|exists:departements,id',
         ]);
+        
 
         try {
             DB::beginTransaction();
@@ -37,9 +38,9 @@ class CommuneController extends Controller
             $commune = Commune::create([
                 'name'           => $request->name,
                 'id_departement' => $request->id_departement,
-                'id_maire'       => null,
+                'id_maire'       => 1,
             ]);
-
+            
             // Génération d’un email pour le maire
             $slug  = Str::slug($request->name, '_');
             $email = strtolower($slug) . '@citinova.bj';

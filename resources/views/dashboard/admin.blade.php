@@ -9,7 +9,7 @@
             </p>
         </div>
 
-        {{-- 🔢 Statistiques (tes cartes) --}}
-        @include('partials.dashboard-stats-admin')
+        {{-- 🔢 Statistiques (tes cartes)  @include('partials.dashboard-stats-admin') --}}
+       
     </div>
 </x-app-layout>
