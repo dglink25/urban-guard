@@ -9,7 +9,7 @@ class Departement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'id_prefect'];
+    protected $fillable = ['name', 'id_prefect', 'email_officiel'];
 
     public function prefect()
     {

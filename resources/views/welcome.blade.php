@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ config('app.name', 'Urban Guard') }}</title>
+        <title>{{ config('app.name', 'CitiNova') }} - Administration</title>
 
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,6 +23,7 @@
                 --gray-light: #F4F6FC;
                 --white: #FFFFFF;
                 --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+                --gradient-authority: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
             }
 
             body {
@@ -32,8 +33,8 @@
                 color: var(--dark-color);
             }
 
-            .urban-hero {
-                background: var(--gradient-primary);
+            .authority-hero {
+                background: var(--gradient-authority);
                 color: white;
                 border-radius: 20px;
                 padding: 4rem 2rem;
@@ -42,7 +43,7 @@
                 overflow: hidden;
             }
 
-            .urban-hero::before {
+            .authority-hero::before {
                 content: '';
                 position: absolute;
                 top: 0;
@@ -54,7 +55,7 @@
                 transform: translate(30%, -30%);
             }
 
-            .urban-hero::after {
+            .authority-hero::after {
                 content: '';
                 position: absolute;
                 bottom: 0;
@@ -105,7 +106,7 @@
             .feature-icon {
                 width: 60px;
                 height: 60px;
-                background: var(--gradient-primary);
+                background: var(--gradient-authority);
                 border-radius: 12px;
                 display: flex;
                 align-items: center;
@@ -118,8 +119,8 @@
                 color: white;
             }
 
-            .btn-urban {
-                background: var(--gradient-primary);
+            .btn-authority {
+                background: var(--gradient-authority);
                 border: none;
                 border-radius: 8px;
                 padding: 12px 30px;
@@ -128,24 +129,24 @@
                 transition: all 0.3s ease;
             }
 
-            .btn-urban:hover {
+            .btn-authority:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 4px 15px rgba(46, 91, 255, 0.3);
+                box-shadow: 0 4px 15px rgba(26, 35, 126, 0.4);
                 color: white;
             }
 
-            .btn-outline-urban {
+            .btn-outline-authority {
                 background: transparent;
-                border: 2px solid var(--primary-color);
+                border: 2px solid #1a237e;
                 border-radius: 8px;
                 padding: 10px 28px;
                 font-weight: 500;
-                color: var(--primary-color);
+                color: #1a237e;
                 transition: all 0.3s ease;
             }
 
-            .btn-outline-urban:hover {
-                background: var(--primary-color);
+            .btn-outline-authority:hover {
+                background: #1a237e;
                 color: white;
                 transform: translateY(-2px);
             }
@@ -161,7 +162,7 @@
 
             .nav-link-custom:hover {
                 background: var(--gray-light);
-                color: var(--primary-color) !important;
+                color: #1a237e !important;
             }
 
             .nav-link-custom.btn-login {
@@ -169,13 +170,13 @@
             }
 
             .nav-link-custom.btn-register {
-                background: var(--primary-color);
+                background: var(--gradient-authority);
                 color: white !important;
-                border: 1px solid var(--primary-color);
+                border: 1px solid #1a237e;
             }
 
             .nav-link-custom.btn-register:hover {
-                background: var(--primary-dark);
+                background: #0d184e;
                 color: white !important;
             }
 
@@ -189,7 +190,7 @@
             .stat-number {
                 font-size: 2.5rem;
                 font-weight: 700;
-                color: var(--primary-color);
+                color: #1a237e;
                 margin-bottom: 0.5rem;
             }
 
@@ -199,6 +200,46 @@
                 font-weight: 500;
             }
 
+            .dashboard-card {
+                background: var(--white);
+                border-radius: 16px;
+                padding: 1.5rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                border: 1px solid var(--gray-light);
+                transition: all 0.3s ease;
+                height: 100%;
+            }
+
+            .dashboard-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+            }
+
+            .dashboard-icon {
+                width: 50px;
+                height: 50px;
+                background: var(--gradient-authority);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+
+            .dashboard-icon i {
+                font-size: 1.3rem;
+                color: white;
+            }
+
+            .priority-badge {
+                background: #ff5252;
+                color: white;
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+            }
+
             .footer {
                 background: var(--dark-color);
                 color: white;
@@ -206,8 +247,22 @@
                 margin-top: 4rem;
             }
 
+            .alert-item {
+                border-left: 4px solid #ff5252;
+                padding-left: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .alert-item.medium {
+                border-left-color: #ff9800;
+            }
+
+            .alert-item.low {
+                border-left-color: #4caf50;
+            }
+
             @media (max-width: 768px) {
-                .urban-hero {
+                .authority-hero {
                     padding: 3rem 1.5rem;
                     text-align: center;
                 }
@@ -228,9 +283,9 @@
             @if (Route::has('login'))
                 <nav class="navbar navbar-expand-lg">
                     <div class="container-fluid">
-                        <a class="navbar-brand fw-bold fs-3 text-primary" href="{{ url('/') }}">
-                            <i class="fas fa-shield-alt me-2"></i>
-                            Urban Guard
+                        <a class="navbar-brand fw-bold fs-3" href="{{ url('/') }}" style="color: #1a237e;">
+                            <i class="fas fa-landmark me-2"></i>
+                            CITINOVA <span class="badge bg-light text-dark ms-2">Administration</span>
                         </a>
                         
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -243,7 +298,7 @@
                                     <li class="nav-item">
                                         <a href="{{ url('/dashboard') }}" class="nav-link-custom btn-register">
                                             <i class="fas fa-tachometer-alt me-2"></i>
-                                            Dashboard
+                                            Tableau de bord
                                         </a>
                                     </li>
                                 @else
@@ -272,114 +327,221 @@
         <!-- Main Content -->
         <main class="container">
             <!-- Hero Section -->
-            <section class="urban-hero text-center">
+            <section class="authority-hero">
                 <div class="hero-content">
-                    <div class="brand-logo mx-auto">
-                        <i class="fas fa-city"></i>
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <div class="brand-logo d-inline-flex">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h1 class="display-5 fw-bold mb-3">Portail d'Administration CITINOVA</h1>
+                            <p class="lead mb-4 opacity-90">
+                                Système de veille citoyenne pour les autorités locales. Supervisez, analysez et réagissez aux alertes citoyennes en temps réel.
+                            </p>
+                            <div class="hero-buttons d-flex gap-3">
+                                @auth
+                                    <a href="{{ url('/dashboard') }}" class="btn btn-authority btn-lg">
+                                        <i class="fas fa-tachometer-alt me-2"></i>
+                                        Accéder au tableau de bord
+                                    </a>
+                                @else
+                                    <a href="{{ route('register') }}" class="btn btn-authority btn-lg">
+                                        <i class="fas fa-user-shield me-2"></i>
+                                        Créer un compte autorité
+                                    </a>
+                                    <a href="{{ route('login') }}" class="btn btn-outline-authority btn-lg">
+                                        <i class="fas fa-sign-in-alt me-2"></i>
+                                        Se connecter
+                                    </a>
+                                @endauth
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <i class="fas fa-user-tie display-1 opacity-75"></i>
+                        </div>
                     </div>
-                    <h1 class="display-4 fw-bold mb-3">Urban Guard</h1>
-                    <p class="lead mb-4 opacity-90 fs-5">
-                        Système intelligent de veille citoyenne pour Cotonou
-                    </p>
-                    <p class="mb-4 opacity-80">
-                        Transformez la gestion urbaine grâce à notre plateforme collaborative de signalement d'incidents en temps réel
-                    </p>
-                    <div class="hero-buttons d-flex gap-3 justify-content-center flex-wrap">
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="btn btn-light btn-lg px-4">
-                                <i class="fas fa-tachometer-alt me-2"></i>
-                                Accéder au Dashboard
-                            </a>
-                        @else
-                            <a href="{{ route('register') }}" class="btn btn-light btn-lg px-4">
-                                <i class="fas fa-rocket me-2"></i>
-                                Commencer maintenant
-                            </a>
-                            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg px-4">
-                                <i class="fas fa-sign-in-alt me-2"></i>
-                                Se connecter
-                            </a>
-                        @endauth
+                </div>
+            </section>
+
+            <!-- Quick Stats Section -->
+            <section class="stats-section mb-5">
+                <div class="row text-center">
+                    <div class="col-md-3 mb-4">
+                        <div class="stat-number">1,247</div>
+                        <div class="stat-label">Alertes traitées ce mois</div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="stat-number">94%</div>
+                        <div class="stat-label">Taux de résolution</div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="stat-number">32</div>
+                        <div class="stat-label">Jours sans incident majeur</div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Départements actifs</div>
                     </div>
                 </div>
             </section>
 
             <!-- Features Section -->
-            <section class="row g-4 mb-5">
-                <div class="col-md-4">
-                    <div class="feature-card text-center">
-                        <div class="feature-icon mx-auto">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3">Signalement en temps réel</h4>
-                        <p class="text-muted">
-                            Signalez rapidement les incidents urbains avec géolocalisation automatique et photos
-                        </p>
+            <section class="mb-5">
+                <div class="row mb-5">
+                    <div class="col-12 text-center">
+                        <h2 class="fw-bold mb-3">Fonctionnalités dédiées aux autorités</h2>
+                        <p class="text-muted">Des outils puissants pour une gestion efficace de la veille citoyenne</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="feature-card text-center">
-                        <div class="feature-icon mx-auto">
-                            <i class="fas fa-map"></i>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Tableaux de bord analytiques</h4>
+                            <p class="text-muted">
+                                Visualisez les données d'alertes par zone, type et priorité. Suivez les indicateurs de performance de vos services.
+                            </p>
                         </div>
-                        <h4 class="fw-bold mb-3">Carte interactive</h4>
-                        <p class="text-muted">
-                            Visualisez tous les incidents sur une carte dynamique avec filtres par type et statut
-                        </p>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card text-center">
-                        <div class="feature-icon mx-auto">
-                            <i class="fas fa-chart-bar"></i>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Alertes en temps réel</h4>
+                            <p class="text-muted">
+                                Recevez des notifications instantanées pour les alertes prioritaires et coordonnez les interventions rapidement.
+                            </p>
                         </div>
-                        <h4 class="fw-bold mb-3">Tableau de bord</h4>
-                        <p class="text-muted">
-                            Suivez les statistiques et gérez les incidents grâce à un dashboard complet
-                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users-cog"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Gestion des équipes</h4>
+                            <p class="text-muted">
+                                Affectez des alertes aux services compétents et suivez l'avancement des interventions en temps réel.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Cartographie interactive</h4>
+                            <p class="text-muted">
+                                Visualisez géographiquement les alertes et identifiez les zones à problèmes sur une carte détaillée.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Rapports automatisés</h4>
+                            <p class="text-muted">
+                                Générez des rapports détaillés pour les instances décisionnelles et les communications officielles.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Sécurité renforcée</h4>
+                            <p class="text-muted">
+                                Accès sécurisé avec authentification à deux facteurs et gestion des permissions par niveau hiérarchique.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Stats Section -->
-            <section class="stats-section text-center mb-5">
+            <!-- Dashboard Preview -->
+            <section class="mb-5">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="fw-bold mb-3">Aperçu du tableau de bord</h2>
+                        <p class="text-muted">Interface de gestion complète pour les autorités locales</p>
+                    </div>
+                </div>
                 <div class="row g-4">
-                    <div class="col-md-3 col-6">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Signalements traités</div>
+                    <div class="col-md-6">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="dashboard-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <span class="priority-badge">HAUTE PRIORITÉ</span>
+                            </div>
+                            <h4 class="fw-bold mb-3">Alertes urgentes</h4>
+                            <div class="alert-item">
+                                <h6 class="fw-bold mb-1">Route barrée - Inondation</h6>
+                                <p class="mb-1 text-muted">Arrondissement de Cadjehoun</p>
+                                <small class="text-muted">Il y a 15 minutes</small>
+                            </div>
+                            <div class="alert-item medium">
+                                <h6 class="fw-bold mb-1">Décharge sauvage</h6>
+                                <p class="mb-1 text-muted">Quartier Saint Michel</p>
+                                <small class="text-muted">Il y a 2 heures</small>
+                            </div>
+                            <div class="alert-item low">
+                                <h6 class="fw-bold mb-1">Éclairage public défaillant</h6>
+                                <p class="mb-1 text-muted">Avenue Steinmetz</p>
+                                <small class="text-muted">Il y a 5 heures</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3 col-6">
-                        <div class="stat-number">24h/24</div>
-                        <div class="stat-label">Disponibilité</div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Quartiers couverts</div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Satisfaction</div>
+                    <div class="col-md-6">
+                        <div class="dashboard-card">
+                            <div class="dashboard-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <h4 class="fw-bold mb-3">Interventions en cours</h4>
+                            <div class="progress mb-3" style="height: 10px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="text-muted mb-3">75% des alertes en cours de traitement</p>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Équipe Voirie</span>
+                                <span class="fw-bold">12/15</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Équipe Salubrité</span>
+                                <span class="fw-bold">8/10</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Équipe Éclairage</span>
+                                <span class="fw-bold">5/8</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- CTA Section -->
             <section class="text-center py-5">
-                <h2 class="fw-bold mb-3">Prêt à transformer Cotonou ?</h2>
+                <h2 class="fw-bold mb-3">Prêt à superviser la veille citoyenne ?</h2>
                 <p class="text-muted mb-4 lead">
-                    Rejoignez la communauté Urban Guard et contribuez à améliorer votre ville
+                    Rejoignez le portail d'administration CITINOVA et optimisez la gestion des alertes citoyennes
                 </p>
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="btn btn-urban btn-lg">
+                    <a href="{{ url('/dashboard') }}" class="btn btn-authority btn-lg">
                         <i class="fas fa-play-circle me-2"></i>
-                        Commencer à utiliser
+                        Accéder au tableau de bord
                     </a>
                 @else
-                    <a href="{{ route('register') }}" class="btn btn-urban btn-lg me-3">
-                        <i class="fas fa-user-plus me-2"></i>
-                        Créer un compte
+                    <a href="{{ route('register') }}" class="btn btn-authority btn-lg me-3">
+                        <i class="fas fa-user-shield me-2"></i>
+                        Créer un compte autorité
                     </a>
-                    <a href="{{ route('login') }}" class="btn btn-outline-urban btn-lg">
+                    <a href="{{ route('login') }}" class="btn btn-outline-authority btn-lg">
                         <i class="fas fa-sign-in-alt me-2"></i>
                         Se connecter
                     </a>
@@ -393,16 +555,16 @@
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <h5 class="mb-3">
-                            <i class="fas fa-shield-alt me-2"></i>
-                            Urban Guard
+                            <i class="fas fa-landmark me-2"></i>
+                            CITINOVA <span class="badge bg-light text-dark ms-1">Administration</span>
                         </h5>
                         <p class="mb-0 opacity-75">
-                            Système intelligent de veille citoyenne - Phase pilote Cotonou
+                            Système intelligent de veille citoyenne - Portail d'administration pour autorités locales
                         </p>
                     </div>
                     <div class="col-md-6 text-md-end">
                         <p class="mb-0 opacity-75">
-                            &copy; {{ date('Y') }} Urban Guard. Tous droits réservés.
+                            &copy; {{ date('Y') }} CITINOVA. Tous droits réservés.
                         </p>
                     </div>
                 </div>
