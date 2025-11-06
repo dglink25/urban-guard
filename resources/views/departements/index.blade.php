@@ -37,16 +37,20 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach($departements as $departement)
                             <tr class="hover:bg-indigo-50 transition duration-150 ease-in-out odd:bg-white even:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $departement->id }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold">{{ $departement->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    {{ $loop->iteration + ($departements->currentPage() - 1) * $departements->perPage() }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold">
+                                    <a href="{{ route('departements.show', $departement->id) }}">
+                                        {{ $departement->name }}
+                                    </a>
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $departement->prefect->name ?? '-' }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
                                     <!-- Bouton Modifier -->
                                     <a href="{{ route('departements.edit', $departement) }}" class="text-indigo-600 hover:text-indigo-800 transition duration-150">
                                         Modifier
                                     </a>
-                                    
-                                    <!-- Bouton Supprimer (déclenche le modal) -->
                                     <button
                                         @click.prevent="showModal = true; deleteRoute = '{{ route('departements.destroy', $departement) }}'"
                                         class="text-red-600 hover:text-red-800 transition duration-150"

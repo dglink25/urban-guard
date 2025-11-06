@@ -39,7 +39,9 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach($arrondissements as $arrondissement)
                             <tr class="hover:bg-indigo-50 transition duration-150 ease-in-out odd:bg-white even:bg-gray-50">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $arrondissement->id }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    {{ $loop->iteration + ($arrondissements->currentPage() - 1) * $arrondissements->perPage() }}
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold">{{ $arrondissement->name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $arrondissement->departement->name ?? '-' }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $arrondissement->commune->name ?? '-' }}</td>

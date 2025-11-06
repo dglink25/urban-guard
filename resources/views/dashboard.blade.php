@@ -115,18 +115,3 @@
         </div>
     </div>
 </x-app-layout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--Maintenant je veux créer migrations departements : id, name, id_prefect (clé étrangère de la table users); communes : id, name, id_departement (clé étrangère de la table departements), id_maire (clé étrangère de la table users); arrondissements : id, name, id_departement (clé étrangère table departements), id_ca (clé étrangère table users), id_commune (clé étrangère de la table communes) et quatiers : id, name, liens_google_maps, id_departement (clé étrangère table departements), id_cq (clé étrangère table users), id_commune (clé étrangère de la table communes), id_arrondissement (clé étrangère de la table arrondissements). Je veux migrations et models avec les relations complets -->

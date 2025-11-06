@@ -69,4 +69,19 @@ class User extends Authenticatable
         return $this->hasMany(Quartier::class, 'id_cq');
     }
 
+    public function arrondissementDirige(){
+        return $this->hasOne(Arrondissement::class, 'id_ca');
+    }
+
+    public function communeDirigee(){
+        return $this->hasOne(Commune::class, 'id_maire');
+    }
+
+    public function departementDirige(){
+        return $this->hasOne(Departement::class, 'id_prefet');
+    }
+
+
+
+
 }

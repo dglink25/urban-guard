@@ -30,4 +30,8 @@ class Arrondissement extends Model
     {
         return $this->hasMany(Quartier::class, 'id_arrondissement');
     }
+
+    public function chef(){
+        return $this->belongsTo(User::class, 'id_ca');
+    }
 }

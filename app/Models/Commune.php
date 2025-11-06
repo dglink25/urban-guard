@@ -30,4 +30,5 @@ class Commune extends Model
     {
         return $this->hasMany(Quartier::class, 'id_commune');
     }
+    
 }

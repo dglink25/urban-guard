@@ -16,6 +16,10 @@ class Departement extends Model
         return $this->belongsTo(User::class, 'id_prefect');
     }
 
+    public function prefet(){
+        return $this->belongsTo(User::class, 'id_prefect');
+    }
+
     public function communes()
     {
         return $this->hasMany(Commune::class, 'id_departement');

@@ -11,6 +11,11 @@ use App\Models\Commune;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\UserValidationController;
 use App\Models\Quartier;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PrefetController;
+use App\Http\Controllers\MaireController;
+use App\Http\Controllers\CAController;
+
 
 Route::get('/api/communes/{departement}', function ($departementId) {
     return Commune::where('id_departement', $departementId)->select('id', 'name')->get();
@@ -35,9 +40,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -67,3 +72,20 @@ Route::get('/arrondissements/by-commune/{id}', function ($id) {
     return Arrondissement::where('id_commune', $id)->select('id', 'name')->get();
 })->name('arrondissements.by-commune');
 
+Route::get('/communes/{commune}', [CommuneController::class, 'show'])->name('communes.show');
+
+Route::get('/departements/{departement}', [DepartementController::class, 'show'])->name('departements.show');
+
+Route::middleware(['auth'])->group(function () {
+
+    /** PRÉFET */
+    Route::get('/prefet/communes', [PrefetController::class, 'communes'])->name('prefet.communes');
+    Route::get('/prefet/statistiques', [PrefetController::class, 'stats'])->name('prefet.stats');
+
+    /** MAIRE */
+    Route::get('/maire/arrondissements', [MaireController::class, 'arrondissements'])->name('maire.arrondissements');
+    Route::get('/maire/statistiques', [MaireController::class, 'stats'])->name('maire.stats');
+
+    /** CHEF D’ARRONDISSEMENT */
+    Route::get('/ca/statistiques', [CAController::class, 'stats'])->name('ca.stats');
+});
