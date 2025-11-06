@@ -10,7 +10,24 @@
                 Ajouter un Département
             </h1>
         </div>
-        
+
+        <!-- ⚠️ BLOC GLOBAL D’ERREURS -->
+        @if ($errors->any())
+            <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 shadow-sm">
+                <div class="flex items-center mb-2">
+                    <svg class="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 8v4m0 4h.01M21 12A9 9 0 113 12a9 9 0 0118 0z"/>
+                    </svg>
+                    <p class="font-semibold">Des erreurs ont été détectées :</p>
+                </div>
+                <ul class="list-disc list-inside text-sm space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <!-- FORMULAIRE : Carte Élevée et Bordure Accent -->
         <form method="POST" action="{{ route('departements.store') }}" 
               class="bg-white shadow-2xl rounded-xl p-8 space-y-6 border-l-4 border-indigo-500 transition duration-300 hover:shadow-indigo-100/50">

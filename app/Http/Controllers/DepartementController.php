@@ -22,21 +22,19 @@ class DepartementController extends Controller
         return view('departements.create');
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'name' => 'required|string|max:255|unique:departements,name',
         ]);
 
         try {
             DB::beginTransaction();
-
             // Création du département
             $departement = Departement::create([
                 'name' => $request->name,
-                'id_prefet' => null,
+                'id_prefect' => 1,
             ]);
-
+            
             // Génération d’un email unique
             $slug  = Str::slug($request->name, '_');
             $email = strtolower($slug) . '@citinova.bj';
@@ -57,19 +55,21 @@ class DepartementController extends Controller
 
             // Mise à jour du département
             $departement->update([
-                'id_prefet' => $user->id,
+                'id_prefect' => $user->id,
             ]);
 
             DB::commit();
 
             return redirect()->route('departements.index')
                 ->with('success', 'Département et compte préfet créés avec succès.');
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()
                 ->withInput()
                 ->with('error', 'Erreur lors de la création : ' . $e->getMessage());
         }
+        
     }
 
     public function edit(Departement $departement)

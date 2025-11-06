@@ -24,8 +24,7 @@ class CommuneController extends Controller
         return view('communes.create', compact('departements'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'name'           => 'required|string|max:255',
             'id_departement' => 'required|exists:departements,id',
