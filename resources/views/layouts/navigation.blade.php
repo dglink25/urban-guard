@@ -4,10 +4,15 @@
 
             <!-- 🏛️ Logo / Titre -->
             <div class="flex-shrink-0 text-xl font-extrabold text-indigo-700 tracking-wide">
-                ADMINISTRATION
+                @auth
+                    ADMINISTRATION
+                @else
+                    CITINOVA
+                @endauth
             </div>
 
             <!-- 🧭 Liens principaux -->
+            @auth
             <div class="hidden sm:flex space-x-6 items-center">
                 @switch(Auth::user()->role)
                     @case('admin')
@@ -51,8 +56,10 @@
                         @break
                 @endswitch
             </div>
+            @endauth
 
             <!-- 👤 Menu utilisateur -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:space-x-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -80,6 +87,19 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @else
+            <!-- Liens de connexion pour les visiteurs non authentifiés -->
+            <div class="hidden sm:flex space-x-4 items-center">
+                <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    {{ __('Connexion') }}
+                </x-nav-link>
+                @if(Route::has('register'))
+                <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                    {{ __('Inscription') }}
+                </x-nav-link>
+                @endif
+            </div>
+            @endauth
 
             <!-- 🍔 Bouton mobile -->
             <div class="sm:hidden -mr-2 flex items-center">
@@ -96,30 +116,43 @@
     <!-- 📱 Menu mobile -->
     <div :class="{'block': open, 'hidden': !open}" class="hidden sm:hidden bg-gray-50 border-t border-indigo-100">
         <div class="pt-2 pb-3 space-y-1">
-            @switch(Auth::user()->role)
-                @case('admin')
-                    <x-responsive-nav-link :href="route('departements.index')" :active="request()->routeIs('departements.*')">{{ __('Départements') }}</x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('communes.index')" :active="request()->routeIs('communes.*')">{{ __('Communes') }}</x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('arrondissements.index')" :active="request()->routeIs('arrondissements.*')">{{ __('Arrondissements') }}</x-responsive-nav-link>
-                    @break
+            @auth
+                @switch(Auth::user()->role)
+                    @case('admin')
+                        <x-responsive-nav-link :href="route('departements.index')" :active="request()->routeIs('departements.*')">{{ __('Départements') }}</x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('communes.index')" :active="request()->routeIs('communes.*')">{{ __('Communes') }}</x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('arrondissements.index')" :active="request()->routeIs('arrondissements.*')">{{ __('Arrondissements') }}</x-responsive-nav-link>
+                        @break
 
-                @case('prefet')
-                    <x-responsive-nav-link :href="route('prefet.communes')" :active="request()->routeIs('prefet.communes')">{{ __('Mes communes') }}</x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('prefet.stats')" :active="request()->routeIs('prefet.stats')">{{ __('Statistiques du département') }}</x-responsive-nav-link>
-                    @break
+                    @case('prefet')
+                        <x-responsive-nav-link :href="route('prefet.communes')" :active="request()->routeIs('prefet.communes')">{{ __('Mes communes') }}</x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('prefet.stats')" :active="request()->routeIs('prefet.stats')">{{ __('Statistiques du département') }}</x-responsive-nav-link>
+                        @break
 
-                @case('maire')
-                    <x-responsive-nav-link :href="route('maire.arrondissements')" :active="request()->routeIs('maire.arrondissements')">{{ __('Mes arrondissements') }}</x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('maire.stats')" :active="request()->routeIs('maire.stats')">{{ __('Statistiques de la commune') }}</x-responsive-nav-link>
-                    @break
+                    @case('maire')
+                        <x-responsive-nav-link :href="route('maire.arrondissements')" :active="request()->routeIs('maire.arrondissements')">{{ __('Mes arrondissements') }}</x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('maire.stats')" :active="request()->routeIs('maire.stats')">{{ __('Statistiques de la commune') }}</x-responsive-nav-link>
+                        @break
 
-                @case('chef_arrondissement')
-                    <x-responsive-nav-link :href="route('ca.stats')" :active="request()->routeIs('ca.stats')">{{ __('Statistiques de l\'arrondissement') }}</x-responsive-nav-link>
-                    @break
-            @endswitch
+                    @case('chef_arrondissement')
+                        <x-responsive-nav-link :href="route('ca.stats')" :active="request()->routeIs('ca.stats')">{{ __('Statistiques de l\'arrondissement') }}</x-responsive-nav-link>
+                        @break
+                @endswitch
+            @else
+                <!-- Menu mobile pour visiteurs non authentifiés -->
+                <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    {{ __('Connexion') }}
+                </x-responsive-nav-link>
+                @if(Route::has('register'))
+                <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                    {{ __('Inscription') }}
+                </x-responsive-nav-link>
+                @endif
+            @endauth
         </div>
 
         <!-- Utilisateur (mobile) -->
+        @auth
         <div class="pt-4 pb-3 border-t border-indigo-100">
             <div class="px-4">
                 <div class="font-semibold text-gray-800">{{ Auth::user()->name }}</div>
@@ -133,5 +166,6 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
 </nav>

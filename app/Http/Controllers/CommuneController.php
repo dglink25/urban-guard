@@ -19,7 +19,7 @@ class CommuneController extends Controller
     }
 
     public function create()
-    {
+    {       
         $departements = Departement::all();
         return view('communes.create', compact('departements'));
     }
@@ -37,7 +37,7 @@ class CommuneController extends Controller
             $commune = Commune::create([
                 'name'           => $request->name,
                 'id_departement' => $request->id_departement,
-                'id_maire'       => null,
+                'id_maire'       => 1,
             ]);
 
             // Génération d’un email pour le maire
