@@ -5,7 +5,24 @@
             <!-- 🏛️ Logo / Titre -->
             <div class="flex-shrink-0 text-xl font-extrabold text-indigo-700 tracking-wide">
                 @auth
-                    ADMINISTRATION
+                    @switch(Auth::user()->role)
+                        @case('admin')
+                            Administrateur
+                            @break
+
+                        @case('prefet')
+                                Préfet
+                            @break
+
+                        @case('maire')
+                            Maire
+                        @break
+
+                        @case('chef_arrondissement')                        
+                            Chef Arrondissement
+                        @break
+                    @endswitch
+                    
                 @else
                     CITINOVA
                 @endauth

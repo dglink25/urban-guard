@@ -14,17 +14,9 @@
                     @case('bâtiment') 🏗️ @break
                     @case('travaux') 🚧 @break
                     @case('panne électrique') 💡 @break
-                    @default 📍
+                    @default
                 @endswitch
             </span>
-            <div>
-                <div class="text-sm font-bold text-gray-800 capitalize">
-                    {{ $declaration->infrastructure_type }}
-                </div>
-                <div class="text-xs text-gray-500">
-                    #{{ str_pad($declaration->id, 6, '0', STR_PAD_LEFT) }}
-                </div>
-            </div>
         </div>
         <div class="flex flex-col items-end gap-2">
             <span class="text-xs text-gray-500">

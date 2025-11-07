@@ -319,7 +319,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h1 class="hero-title animate__animated animate__fadeInUp">
-                        CITINOVA - Gestion Intelligente des Infrastructures Territoriales
+                        CITINOVA Gestion Intelligente des Infrastructures Territoriales
                     </h1>
                     <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
                         Plateforme centralisée pour la gestion, le suivi et l'optimisation des infrastructures publiques au Bénin
@@ -338,26 +338,6 @@
                         <img src="https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                              alt="Infrastructures urbaines" class="img-fluid rounded-3 shadow-lg">
                     </div>
-                </div>
-            </div>
-            
-            <!-- Statistiques -->
-            <div class="row hero-stats animate__animated animate__fadeInUp animate__delay-3s">
-                <div class="col-md-3 col-6 text-center">
-                    <div class="stat-number">12</div>
-                    <div class="stat-label">Départements</div>
-                </div>
-                <div class="col-md-3 col-6 text-center">
-                    <div class="stat-number">2,156</div>
-                    <div class="stat-label">Km de Routes</div>
-                </div>
-                <div class="col-md-3 col-6 text-center">
-                    <div class="stat-number">15,842</div>
-                    <div class="stat-label">Points Lumineux</div>
-                </div>
-                <div class="col-md-3 col-6 text-center">
-                    <div class="stat-number">327</div>
-                    <div class="stat-label">Projets Actifs</div>
                 </div>
             </div>
         </div>
@@ -405,63 +385,6 @@
                                 <span class="badge bg-success">92% opérationnels</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Carte Interactive -->
-    <section id="carte" class="map-section">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title">Carte Interactive des Infrastructures</h2>
-                <p class="section-subtitle">Visualisez en temps réel l'état des infrastructures sur l'ensemble du territoire</p>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="benin-map">
-                        <!-- Carte du Bénin avec zones interactives -->
-                        <div class="text-center p-5 bg-light rounded-3">
-                            <h5>Carte Interactive du Bénin</h5>
-                            <p class="text-muted">Visualisation des infrastructures par département</p>
-                            <div class="mt-4">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Benin_%28orthographic_projection%29.svg" 
-                                     alt="Carte du Bénin" class="img-fluid" style="max-height: 400px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4">
-                    <h5 class="mb-4">Départements</h5>
-                    
-                    <!-- Liste des départements avec statistiques -->
-                    @foreach($departements->take(5) as $departement)
-                    <div class="department-card">
-                        <h6>{{ $departement->name }}</h6>
-                        <div class="department-stats">
-                            <div class="stat-item">
-                                <div class="stat-value">156</div>
-                                <div class="stat-label">Routes</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">1,284</div>
-                                <div class="stat-label">Éclairages</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">24</div>
-                                <div class="stat-label">Projets</div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    
-                    <div class="text-center mt-4">
-                        <a href="#" class="btn btn-outline-primary">
-                            Voir tous les départements
-                        </a>
                     </div>
                 </div>
             </div>
@@ -551,7 +474,7 @@
                     <h6 class="footer-title">Contact</h6>
                     <ul class="footer-links">
                         <li><i class="fas fa-map-marker-alt me-2"></i> Cotonou, Bénin</li>
-                        <li><i class="fas fa-phone me-2"></i> +229 XX XX XX XX</li>
+                        <li><i class="fas fa-phone me-2"></i> +229 01 94 11 94 76</li>
                         <li><i class="fas fa-envelope me-2"></i> contact@citinova.bj</li>
                     </ul>
                 </div>
@@ -560,7 +483,7 @@
             <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
             
             <div class="text-center">
-                <p class="mb-0">&copy; 2024 CITINOVA - Tous droits réservés</p>
+                <p class="mb-0">&copy; 2025 CITINOVA - Tous droits réservés</p>
             </div>
         </div>
     </footer>

@@ -71,7 +71,7 @@
                         Déclarations suivies
                     </button>
                     <button id="filter-urgence" class="filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-medium transition-all text-sm">
-                        🔥 Urgences
+                        Urgences
                     </button>
                 </div>
                 
@@ -84,7 +84,7 @@
                     </select>
                     
                     <button id="locate-me" class="px-6 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition-all flex items-center gap-2 text-sm">
-                        📍 Ma Position
+                        Ma Position
                     </button>
                 </div>
             </div>
