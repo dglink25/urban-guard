@@ -15,7 +15,7 @@
             @endphp
             
             <h1 class="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">
-                Tableau de Bord - {{ $roleTitle }}
+                Tableau de Bord {{ $roleTitle }}
             </h1>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                 @switch(Auth::user()->role)
