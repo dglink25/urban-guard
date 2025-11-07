@@ -1,348 +1,319 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Connexion - CITINOVA</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - CITINOVA</title>
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        
-        <style>
-            :root {
-                --primary-color: #2E5BFF;
-                --primary-dark: #1E4BD2;
-                --secondary-color: #00C389;
-                --dark-color: #2E384D;
-                --gray-dark: #8798AD;
-                --gray-medium: #BFC5D2;
-                --gray-light: #F4F6FC;
-                --white: #FFFFFF;
-                --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            }
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-            body {
-                font-family: 'Inter', sans-serif;
-                background: linear-gradient(135deg, var(--gray-light) 0%, var(--white) 100%);
-                min-height: 100vh;
-                color: var(--dark-color);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-            }
+    <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #28a745;
+            --accent-color: #f39c12;
+        }
 
-            .login-container {
-                max-width: 440px;
-                width: 100%;
-            }
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-            .login-card {
-                background: var(--white);
-                border-radius: 20px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-                border: none;
-                overflow: hidden;
-            }
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            overflow: hidden;
+            animation: slideIn 0.5s ease-out;
+        }
 
-            .card-header {
-                background: var(--gradient-primary);
-                color: white;
-                text-align: center;
-                padding: 2.5rem 2rem;
-                border-bottom: none;
-            }
+        @keyframes slideIn {
+            from {opacity: 0; transform: translateY(30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
 
-            .brand-logo {
-                width: 50px;
-                height: 50px;
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 12px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0 auto 1rem;
-            }
+        .login-header {
+            background: linear-gradient(135deg, var(--primary-color), #144a6d);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
 
-            .brand-logo i {
-                font-size: 1.5rem;
-                color: white;
-            }
+        .login-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+        }
 
-            .brand-name {
-                font-weight: 700;
-                font-size: 1.8rem;
-                margin-bottom: 0.5rem;
-            }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
 
-            .brand-subtitle {
-                opacity: 0.9;
-                font-size: 0.9rem;
-            }
+        .logo {
+            width: 60px;
+            height: auto;
+        }
 
-            .card-body {
-                padding: 2.5rem;
-            }
+        .login-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
 
-            .form-label {
-                font-weight: 500;
-                color: var(--dark-color);
-                margin-bottom: 0.5rem;
-                font-size: 0.9rem;
-            }
+        .login-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 0;
+        }
 
-            .form-control {
-                border-radius: 8px;
-                padding: 12px 16px;
-                border: 1px solid var(--gray-medium);
-                transition: all 0.3s ease;
-                font-size: 0.95rem;
-            }
+        .login-body {
+            padding: 40px 30px;
+        }
 
-            .form-control:focus {
-                border-color: var(--primary-color);
-                box-shadow: 0 0 0 3px rgba(46, 91, 255, 0.1);
-            }
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
 
-            .password-toggle {
-                cursor: pointer;
-                background: none;
-                border: none;
-                color: var(--gray-dark);
-                transition: color 0.3s ease;
-            }
+        .form-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            display: block;
+        }
 
-            .password-toggle:hover {
-                color: var(--primary-color);
-            }
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 15px 12px 45px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-            .btn-primary {
-                background: var(--gradient-primary);
-                border: none;
-                border-radius: 8px;
-                padding: 12px 24px;
-                font-weight: 500;
-                font-size: 1rem;
-                transition: all 0.3s ease;
-                width: 100%;
-            }
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 82, 118, 0.1);
+            outline: none;
+        }
 
-            .btn-primary:hover {
-                transform: translateY(-1px);
-                box-shadow: 0 4px 12px rgba(46, 91, 255, 0.3);
-            }
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
 
-            .form-check-input:checked {
-                background-color: var(--primary-color);
-                border-color: var(--primary-color);
-            }
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
 
-            .form-check-label {
-                font-size: 0.9rem;
-                color: var(--dark-color);
-            }
+        .password-toggle:hover {
+            color: var(--primary-color);
+        }
 
-            .alert {
-                border-radius: 8px;
-                border: none;
-                font-size: 0.9rem;
-            }
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
 
-            .alert-success {
-                background-color: rgba(102, 187, 106, 0.1);
-                color: #2e7d32;
-                border-left: 4px solid #66BB6A;
-            }
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
 
-            .alert-danger {
-                background-color: rgba(239, 83, 80, 0.1);
-                color: #c62828;
-                border-left: 4px solid #EF5350;
-            }
+        .forgot-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
 
-            .link-primary {
-                color: var(--primary-color);
-                text-decoration: none;
-                font-weight: 500;
-                transition: color 0.3s ease;
-            }
+        .forgot-link:hover {
+            color: #144a6d;
+            text-decoration: underline;
+        }
 
-            .link-primary:hover {
-                color: var(--primary-dark);
-            }
+        .btn-login {
+            background: linear-gradient(135deg, var(--primary-color), #144a6d);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
 
-            .footer-text {
-                color: var(--gray-dark);
-                font-size: 0.85rem;
-                margin-top: 1.5rem;
-                text-align: center;
-            }
+        .btn-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(26,82,118,0.3);
+        }
 
-            .input-group-text {
-                background-color: var(--white);
-                border: 1px solid var(--gray-medium);
-                border-left: none;
-                cursor: pointer;
-            }
+        .login-footer {
+            text-align: center;
+            padding: 20px 30px;
+            border-top: 1px solid #e9ecef;
+            background: #f8f9fa;
+        }
 
-            .input-group .form-control:focus + .input-group-text {
-                border-color: var(--primary-color);
-            }
+        .register-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
 
-            @media (max-width: 576px) {
-                .card-body {
-                    padding: 2rem 1.5rem;
-                }
-                
-                .card-header {
-                    padding: 2rem 1.5rem;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="login-container">
-            <div class="card login-card">
-                <!-- Header -->
-                <div class="card-header">
-                    <div class="brand-logo">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="brand-name">CITINOVA</div>
-                    <div class="brand-subtitle">Système intelligent de veille citoyenne</div>
-                </div>
+        .register-link:hover {
+            color: #144a6d;
+            text-decoration: underline;
+        }
 
-                <div class="card-body">
-                    <h4 class="text-center mb-4" style="color: var(--dark-color);">Connexion à votre compte</h4>
+        .alert {
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            font-weight: 500;
+        }
 
-                    <!-- Session Status -->
-                    @if (session('status'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-check-circle me-2"></i>
-                                <strong>Succès !</strong>
-                            </div>
-                            {{ session('status') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    @endif
-
-                    <!-- Validation Errors -->
-                    @if ($errors->any())
-                        <div class="alert alert-danger mb-4">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-exclamation-triangle me-2"></i>
-                                <strong>Erreur de connexion</strong>
-                            </div>
-                            <ul class="mb-0 ps-3">
-                                @foreach ($errors->all() as $error)
-                                    <li class="small">{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <!-- Email Address -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Adresse email</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" 
-                                   name="email" value="{{ old('email') }}" required autofocus 
-                                   autocomplete="username" placeholder="votre@email.com">
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <!-- Password -->
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Mot de passe</label>
-                            <div class="input-group">
-                                <input id="password" type="password" 
-                                       class="form-control @error('password') is-invalid @enderror"
-                                       name="password" required autocomplete="current-password"
-                                       placeholder="Votre mot de passe">
-                                <button class="btn password-toggle input-group-text" type="button" id="togglePassword">
-                                    <i class="fas fa-eye" id="togglePasswordIcon"></i>
-                                </button>
-                            </div>
-                            @error('password')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <!-- Remember Me -->
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember_me" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember_me">
-                                    Se souvenir de moi
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            @if (Route::has('password.request'))
-                                <a class="link-primary small" href="{{ route('password.request') }}">
-                                    Mot de passe oublié ?
-                                </a>
-                            @endif
-
-                            <button type="submit" class="btn btn-primary px-4">
-                                <i class="fas fa-sign-in-alt me-2"></i>
-                                Se connecter
-                            </button>
-                        </div>
-
-                        <div class="text-center small text-muted">
-                            Pas encore de compte ? 
-                            <a href="{{ route('register') }}" class="link-primary">Créer un compte</a>
-                        </div>
-                    </form>
-
-                    <div class="footer-text">
-                        <span>Urban Guard • Phase pilote Cotonou</span>
-                    </div>
+        .alert-success { background: rgba(40,167,69,0.1); color: #155724; border-left: 4px solid #28a745; }
+        .alert-error { background: rgba(220,53,69,0.1); color: #721c24; border-left: 4px solid #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo-container">
+                <img src="{{ asset('images/CITINOVA1.png') }}" alt="Logo" class="logo">
+                <div class="logo-text">
+                    <h1 class="login-title">CITINOVA</h1>
+                    <p class="login-subtitle">Système intelligent de veille citoyenne</p>
                 </div>
             </div>
         </div>
 
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="login-body">
+            <!-- Session Status -->
+            @if (session('status'))
+                <div class="alert alert-success">{{ session('status') }}</div>
+            @endif
 
-        <script>
-            // Toggle password visibility
-            document.getElementById('togglePassword').addEventListener('click', function() {
-                const password = document.getElementById('password');
-                const icon = document.getElementById('togglePasswordIcon');
-                
-                if (password.type === 'password') {
-                    password.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    password.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                }
-            });
+            <!-- Validation Errors -->
+            @if ($errors->any())
+                <div class="alert alert-error">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-            // Add focus styles dynamically
-            document.querySelectorAll('.form-control').forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.classList.add('focused');
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.parentElement.classList.remove('focused');
-                });
-            });
-        </script>
-    </body>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Adresse Email</label>
+                    <div class="position-relative">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" class="form-control" 
+                               value="{{ old('email') }}" required autofocus autocomplete="email"
+                               placeholder="votre@email.com">
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <div class="position-relative">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" name="password" class="form-control" 
+                               required autocomplete="current-password" placeholder="Votre mot de passe">
+                        <button type="button" class="password-toggle" onclick="togglePassword()">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Remember & Forgot -->
+                <div class="remember-forgot">
+                    <div class="form-check">
+                        <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
+                        <label for="remember_me" class="form-check-label">Se souvenir de moi</label>
+                    </div>
+
+                    @if (Route::has('password.request'))
+                        <a class="forgot-link" href="{{ route('password.request') }}">Mot de passe oublié ?</a>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Se connecter
+                </button>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            <p>Pas encore de compte ? 
+                @if(Route::has('register'))
+                    <a href="{{ route('register') }}" class="register-link">S'inscrire</a>
+                @endif
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.querySelector('.password-toggle i');
+            if(passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
 </html>

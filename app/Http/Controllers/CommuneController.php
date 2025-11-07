@@ -19,7 +19,7 @@ class CommuneController extends Controller
     }
 
     public function create()
-    {
+    {       
         $departements = Departement::all();
         return view('communes.create', compact('departements'));
     }

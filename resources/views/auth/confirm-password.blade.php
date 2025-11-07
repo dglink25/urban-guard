@@ -1,331 +1,232 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Confirmation de sécurité - CITINOVA</title>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de sécurité - CITINOVA</title>
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        
-        <style>
-            :root {
-                --primary-color: #2E5BFF;
-                --primary-dark: #1E4BD2;
-                --secondary-color: #00C389;
-                --dark-color: #2E384D;
-                --gray-dark: #8798AD;
-                --gray-medium: #BFC5D2;
-                --gray-light: #F4F6FC;
-                --white: #FFFFFF;
-                --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            }
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-            body {
-                font-family: 'Inter', sans-serif;
-                background: linear-gradient(135deg, var(--gray-light) 0%, var(--white) 100%);
-                min-height: 100vh;
-                color: var(--dark-color);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-            }
+    <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #28a745;
+            --accent-color: #f39c12;
+            --light-bg: #FDFDFC;
+            --text-dark: #1b1b18;
+        }
 
-            .confirm-container {
-                max-width: 440px;
-                width: 100%;
-            }
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-            .confirm-card {
-                background: var(--white);
-                border-radius: 20px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-                border: none;
-                overflow: hidden;
-            }
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 500px;
+            animation: slideIn 0.5s ease-out;
+        }
 
-            .card-header {
-                background: var(--gradient-primary);
-                color: white;
-                text-align: center;
-                padding: 2.5rem 2rem;
-                border-bottom: none;
-            }
+        .login-header {
+            background: linear-gradient(135deg, var(--primary-color), #144a6d);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
 
-            .brand-logo {
-                width: 50px;
-                height: 50px;
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 12px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0 auto 1rem;
-            }
+        .login-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+        }
 
-            .brand-logo i {
-                font-size: 1.5rem;
-                color: white;
-            }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
 
-            .brand-name {
-                font-weight: 700;
-                font-size: 1.8rem;
-                margin-bottom: 0.5rem;
-            }
+        .logo {
+            width: 60px;
+            height: auto;
+        }
 
-            .brand-subtitle {
-                opacity: 0.9;
-                font-size: 0.9rem;
-            }
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
 
-            .card-body {
-                padding: 2.5rem;
-            }
+        .logo-text p {
+            font-size: 0.9rem;
+            margin: 0;
+            opacity: 0.9;
+        }
 
-            .security-section {
-                background-color: rgba(255, 193, 7, 0.1);
-                border: 1px solid rgba(255, 193, 7, 0.3);
-                border-radius: 12px;
-                padding: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
+        .login-body {
+            padding: 40px 30px;
+        }
 
-            .security-icon {
-                color: #FF9800;
-                margin-right: 12px;
-            }
+        .alert {
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
 
-            .security-text {
-                color: var(--dark-color);
-                font-size: 0.95rem;
-                line-height: 1.5;
-                margin: 0;
-            }
+        .alert-danger {
+            background-color: rgba(243, 156, 18, 0.1);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+        }
 
-            .form-label {
-                font-weight: 500;
-                color: var(--dark-color);
-                margin-bottom: 0.5rem;
-                font-size: 0.9rem;
-            }
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
 
-            .form-control {
-                border-radius: 8px;
-                padding: 12px 16px;
-                border: 1px solid var(--gray-medium);
-                transition: all 0.3s ease;
-                font-size: 0.95rem;
-            }
+        .form-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            display: block;
+        }
 
-            .form-control:focus {
-                border-color: var(--primary-color);
-                box-shadow: 0 0 0 3px rgba(46, 91, 255, 0.1);
-            }
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-            .btn-primary {
-                background: var(--gradient-primary);
-                border: none;
-                border-radius: 8px;
-                padding: 12px 24px;
-                font-weight: 500;
-                font-size: 1rem;
-                transition: all 0.3s ease;
-                width: 100%;
-            }
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 82, 118, 0.1);
+        }
 
-            .btn-primary:hover {
-                transform: translateY(-1px);
-                box-shadow: 0 4px 12px rgba(46, 91, 255, 0.3);
-            }
+        .form-control.with-icon {
+            padding-left: 45px;
+        }
 
-            .alert {
-                border-radius: 8px;
-                border: none;
-                font-size: 0.9rem;
-            }
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
 
-            .alert-danger {
-                background-color: rgba(239, 83, 80, 0.1);
-                color: #c62828;
-                border-left: 4px solid #EF5350;
-            }
+        .btn-login {
+            background: linear-gradient(135deg, var(--primary-color), #144a6d);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-            .password-toggle {
-                cursor: pointer;
-                background: none;
-                border: none;
-                color: var(--gray-dark);
-                transition: color 0.3s ease;
-            }
+        .btn-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(26,82,118,0.3);
+        }
 
-            .password-toggle:hover {
-                color: var(--primary-color);
-            }
+        .login-footer {
+            text-align: center;
+            padding: 20px 30px;
+            border-top: 1px solid #e9ecef;
+            background: #f8f9fa;
+        }
 
-            .input-group-text {
-                background-color: var(--white);
-                border: 1px solid var(--gray-medium);
-                border-left: none;
-                cursor: pointer;
-            }
+        .register-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
 
-            .input-group .form-control:focus + .input-group-text {
-                border-color: var(--primary-color);
-            }
+        .register-link:hover {
+            text-decoration: underline;
+        }
 
-            .footer-text {
-                color: var(--gray-dark);
-                font-size: 0.85rem;
-                margin-top: 1.5rem;
-                text-align: center;
-            }
-
-            @media (max-width: 576px) {
-                .card-body {
-                    padding: 2rem 1.5rem;
-                }
-                
-                .card-header {
-                    padding: 2rem 1.5rem;
-                }
-                
-                .security-section {
-                    padding: 1.25rem;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="confirm-container">
-            <div class="card confirm-card">
-                <!-- Header -->
-                <div class="card-header">
-                    <div class="brand-logo">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="brand-name">CITINOVA</div>
-                    <div class="brand-subtitle">Système intelligent de veille citoyenne</div>
-                </div>
-
-                <div class="card-body">
-                    <h4 class="text-center mb-4" style="color: var(--dark-color);">Confirmation de sécurité</h4>
-
-                    <!-- Security Section -->
-                    <div class="security-section">
-                        <div class="d-flex align-items-start">
-                            <i class="fas fa-shield-lock security-icon mt-1"></i>
-                            <div>
-                                <p class="security-text">
-                                    Ceci est une zone sécurisée de l'application. Veuillez confirmer votre mot de passe avant de continuer.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Validation Errors -->
-                    @if ($errors->any())
-                        <div class="alert alert-danger mb-4">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-exclamation-triangle me-2"></i>
-                                <strong>Erreur de confirmation</strong>
-                            </div>
-                            <ul class="mb-0 ps-3">
-                                @foreach ($errors->all() as $error)
-                                    <li class="small">{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.confirm') }}">
-                        @csrf
-
-                        <!-- Password -->
-                        <div class="mb-4">
-                            <label for="password" class="form-label">Mot de passe actuel</label>
-                            <div class="input-group">
-                                <input id="password" type="password" 
-                                       class="form-control @error('password') is-invalid @enderror"
-                                       name="password" required autocomplete="current-password"
-                                       placeholder="Saisissez votre mot de passe actuel">
-                                <button class="btn password-toggle input-group-text" type="button" id="togglePassword">
-                                    <i class="fas fa-eye" id="togglePasswordIcon"></i>
-                                </button>
-                            </div>
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-shield-check me-2"></i>
-                                Confirmer
-                            </button>
-                        </div>
-                    </form>
-
-                    <div class="footer-text">
-                        <span>Urban Guard • Phase pilote Cotonou</span>
-                    </div>
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo-container">
+                <img src="{{ asset('images/CITINOVA1.png') }}" alt="Logo" class="logo">
+                <div class="logo-text">
+                    <h1>CITINOVA</h1>
+                    <p>Gestion des Infrastructures Territoriales</p>
                 </div>
             </div>
         </div>
 
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="login-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0 ps-3">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Toggle password visibility
-                const togglePassword = document.getElementById('togglePassword');
-                const password = document.getElementById('password');
-                const togglePasswordIcon = document.getElementById('togglePasswordIcon');
-                
-                if (togglePassword && password) {
-                    togglePassword.addEventListener('click', function() {
-                        if (password.type === 'password') {
-                            password.type = 'text';
-                            togglePasswordIcon.classList.remove('fa-eye');
-                            togglePasswordIcon.classList.add('fa-eye-slash');
-                        } else {
-                            password.type = 'password';
-                            togglePasswordIcon.classList.remove('fa-eye-slash');
-                            togglePasswordIcon.classList.add('fa-eye');
-                        }
-                    });
-                }
+            <p class="mb-4">Ceci est une zone sécurisée. Veuillez confirmer votre mot de passe pour continuer.</p>
 
-                // Focus automatique sur le champ mot de passe
-                if (password) {
-                    password.focus();
-                    
-                    // Animation de focus
-                    password.addEventListener('focus', function() {
-                        this.parentElement.classList.add('focused');
-                    });
-                    
-                    password.addEventListener('blur', function() {
-                        this.parentElement.classList.remove('focused');
-                    });
-                }
+            <form method="POST" action="{{ route('password.confirm') }}">
+                @csrf
+                <div class="form-group">
+                    <label for="password" class="form-label">Mot de passe actuel</label>
+                    <div class="position-relative">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input id="password" type="password" name="password" class="form-control with-icon"
+                               placeholder="Saisissez votre mot de passe actuel" required autocomplete="current-password">
+                    </div>
+                </div>
 
-                // Animation de soumission du formulaire
-                const form = document.querySelector('form');
-                form.addEventListener('submit', function() {
-                    const submitButton = this.querySelector('button[type="submit"]');
-                    if (submitButton) {
-                        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Vérification...';
-                        submitButton.disabled = true;
-                    }
-                });
-            });
-        </script>
-    </body>
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-shield-check"></i> Confirmer
+                </button>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            <span>Urban Guard • Phase pilote Cotonou</span>
+        </div>
+    </div>
+</body>
 </html>

@@ -1,544 +1,398 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Inscription - CITINOVA</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - CITINOVA</title>
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        
-        <style>
-            :root {
-                --primary-color: #2E5BFF;
-                --primary-dark: #1E4BD2;
-                --secondary-color: #00C389;
-                --dark-color: #2E384D;
-                --gray-dark: #8798AD;
-                --gray-medium: #BFC5D2;
-                --gray-light: #F4F6FC;
-                --white: #FFFFFF;
-                --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            }
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-            body {
-                font-family: 'Inter', sans-serif;
-                background: linear-gradient(135deg, var(--gray-light) 0%, var(--white) 100%);
-                min-height: 100vh;
-                color: var(--dark-color);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-            }
+    <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #28a745;
+            --accent-color: #f39c12;
+        }
 
-            .register-container {
-                max-width: 800px;
-                width: 100%;
-            }
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-            .register-card {
-                background: var(--white);
-                border-radius: 20px;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-                border: none;
-                overflow: hidden;
-            }
+        .register-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+            animation: slideIn 0.5s ease-out;
+        }
 
-            .card-header {
-                background: var(--gradient-primary);
-                color: white;
-                text-align: center;
-                padding: 2.5rem 2rem;
-                border-bottom: none;
-            }
+        @keyframes slideIn {
+            from {opacity: 0; transform: translateY(30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
 
-            .brand-logo {
-                width: 50px;
-                height: 50px;
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 12px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0 auto 1rem;
-            }
+        .register-header {
+            background: linear-gradient(135deg, var(--primary-color), #144a6d);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
 
-            .brand-logo i {
-                font-size: 1.5rem;
-                color: white;
-            }
+        .register-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+        }
 
-            .brand-name {
-                font-weight: 700;
-                font-size: 1.8rem;
-                margin-bottom: 0.5rem;
-            }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
 
-            .brand-subtitle {
-                opacity: 0.9;
-                font-size: 0.9rem;
-            }
+        .logo {
+            width: 60px;
+            height: auto;
+        }
 
-            .card-body {
-                padding: 2.5rem;
-            }
+        .register-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
 
-            .form-label {
-                font-weight: 500;
-                color: var(--dark-color);
-                margin-bottom: 0.5rem;
-                font-size: 0.9rem;
-            }
+        .register-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 0;
+        }
 
-            .form-control, .form-select {
-                border-radius: 8px;
-                padding: 12px 16px;
-                border: 1px solid var(--gray-medium);
-                transition: all 0.3s ease;
-                font-size: 0.95rem;
-            }
+        .register-body {
+            padding: 40px 30px;
+        }
 
-            .form-control:focus, .form-select:focus {
-                border-color: var(--primary-color);
-                box-shadow: 0 0 0 3px rgba(46, 91, 255, 0.1);
-            }
+        .section-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 5px;
+        }
 
-            .password-toggle {
-                cursor: pointer;
-                background: none;
-                border: none;
-                color: var(--gray-dark);
-                transition: color 0.3s ease;
-            }
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-            .password-toggle:hover {
-                color: var(--primary-color);
-            }
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.9rem;
+        }
 
-            .btn-primary {
-                background: var(--gradient-primary);
-                border: none;
-                border-radius: 8px;
-                padding: 12px 30px;
-                font-weight: 500;
-                font-size: 1rem;
-                transition: all 0.3s ease;
-            }
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #e9ecef;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-            .btn-primary:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 15px rgba(46, 91, 255, 0.3);
-            }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 82, 118, 0.1);
+            outline: none;
+        }
 
-            .alert {
-                border-radius: 8px;
-                border: none;
-                font-size: 0.9rem;
-            }
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
 
-            .alert-danger {
-                background-color: rgba(239, 83, 80, 0.1);
-                color: #c62828;
-                border-left: 4px solid #EF5350;
-            }
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
 
-            .link-primary {
-                color: var(--primary-color);
-                text-decoration: none;
-                font-weight: 500;
-                transition: color 0.3s ease;
-            }
+        .password-toggle:hover {
+            color: var(--primary-color);
+        }
 
-            .link-primary:hover {
-                color: var(--primary-dark);
-            }
+        .btn-register {
+            background: linear-gradient(135deg, var(--primary-color), #144a6d);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
 
-            .footer-text {
-                color: var(--gray-dark);
-                font-size: 0.85rem;
-                margin-top: 1.5rem;
-                text-align: center;
-            }
+        .btn-register:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(26,82,118,0.3);
+        }
 
-            .input-group-text {
-                background-color: var(--white);
-                border: 1px solid var(--gray-medium);
-                border-left: none;
-                cursor: pointer;
-            }
+        .alert {
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            font-weight: 500;
+        }
 
-            .input-group .form-control:focus + .input-group-text {
-                border-color: var(--primary-color);
-            }
+        .alert-success { background: rgba(40,167,69,0.1); color: #155724; border-left: 4px solid #28a745; }
+        .alert-error { background: rgba(220,53,69,0.1); color: #721c24; border-left: 4px solid #dc3545; }
 
-            .section-title {
-                font-size: 1.1rem;
-                font-weight: 600;
-                color: var(--dark-color);
-                margin-bottom: 1rem;
-                padding-bottom: 0.5rem;
-                border-bottom: 2px solid var(--gray-light);
-            }
-
-            .loading-spinner {
-                display: none;
-                width: 16px;
-                height: 16px;
-                border: 2px solid #f3f3f3;
-                border-top: 2px solid var(--primary-color);
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-            }
-
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-
-            @media (max-width: 768px) {
-                .card-body {
-                    padding: 2rem 1.5rem;
-                }
-                
-                .card-header {
-                    padding: 2rem 1.5rem;
-                }
-                
-                .register-container {
-                    max-width: 100%;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="register-container">
-            <div class="card register-card">
-                <!-- Header -->
-                <div class="card-header">
-                    <div class="brand-logo">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="brand-name">CITINOVA</div>
-                    <div class="brand-subtitle">Système intelligent de veille citoyenne</div>
-                </div>
-
-                <div class="card-body">
-                    <h4 class="text-center mb-4" style="color: var(--dark-color);">Créer votre compte</h4>
-
-                    <!-- Validation Errors -->
-                    @if ($errors->any())
-                        <div class="alert alert-danger mb-4">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-exclamation-triangle me-2"></i>
-                                <strong>Erreurs de validation</strong>
-                            </div>
-                            <ul class="mb-0 ps-3">
-                                @foreach ($errors->all() as $error)
-                                    <li class="small">{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <!-- Informations personnelles -->
-                        <div class="section-title">
-                            <i class="fas fa-user me-2"></i>
-                            Informations personnelles
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="name" class="form-label">Nom complet</label>
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" 
-                                       name="name" value="{{ old('name') }}" required autofocus 
-                                       autocomplete="name" placeholder="Votre nom complet">
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">Adresse email</label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" 
-                                       name="email" value="{{ old('email') }}" required 
-                                       autocomplete="username" placeholder="votre@email.com">
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Localisation -->
-                        <div class="section-title mt-4">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            Localisation
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Département</label>
-                                <select id="departement-select" name="id_departement" required
-                                        class="form-select @error('id_departement') is-invalid @enderror">
-                                    <option value="">-- Sélectionner --</option>
-                                    @foreach($departements as $departement)
-                                        <option value="{{ $departement->id }}" {{ old('id_departement') == $departement->id ? 'selected' : '' }}>
-                                            {{ $departement->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('id_departement')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Commune</label>
-                                <select id="commune-select" name="id_commune" required
-                                        class="form-select @error('id_commune') is-invalid @enderror">
-                                    <option value="">-- Sélectionner un département --</option>
-                                </select>
-                                @error('id_commune')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Arrondissement</label>
-                                <select id="arrondissement-select" name="id_arrondissement" required
-                                        class="form-select @error('id_arrondissement') is-invalid @enderror">
-                                    <option value="">-- Sélectionner une commune --</option>
-                                </select>
-                                @error('id_arrondissement')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Quartier</label>
-                                <select id="quartier-select" name="id_quartier" required
-                                        class="form-select @error('id_quartier') is-invalid @enderror">
-                                    <option value="">-- Sélectionner un arrondissement --</option>
-                                </select>
-                                @error('id_quartier')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Rue</label>
-                                <input type="text" name="rue" value="{{ old('rue') }}" required
-                                       class="form-control @error('rue') is-invalid @enderror"
-                                       placeholder="Nom de la rue">
-                                @error('rue')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Maison</label>
-                                <input type="text" name="maison" value="{{ old('maison') }}" required
-                                       class="form-control @error('maison') is-invalid @enderror"
-                                       placeholder="Numéro de maison">
-                                @error('maison')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Rôle -->
-                        <div class="section-title mt-4">
-                            <i class="fas fa-user-tag me-2"></i>
-                            Rôle dans l'administration
-                        </div>
-
-                        <div class="mb-4">
-                            <select name="role" required class="form-select @error('role') is-invalid @enderror">
-                                <option value="">-- Sélectionner votre rôle --</option>
-                                <option value="prefet" {{ old('role') == 'prefet' ? 'selected' : '' }}>Préfet</option>
-                                <option value="maire" {{ old('role') == 'maire' ? 'selected' : '' }}>Maire</option>
-                                <option value="ca" {{ old('role') == 'ca' ? 'selected' : '' }}>Chef d'Arrondissement</option>
-                                <option value="cq" {{ old('role') == 'cq' ? 'selected' : '' }}>Chef de Quartier</option>
-                                <option value="conseiller" {{ old('role') == 'conseiller' ? 'selected' : '' }}>Conseiller</option>
-                            </select>
-                            @error('role')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <!-- Sécurité -->
-                        <div class="section-title mt-4">
-                            <i class="fas fa-lock me-2"></i>
-                            Sécurité du compte
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="password" class="form-label">Mot de passe</label>
-                                <div class="input-group">
-                                    <input id="password" type="password" 
-                                           class="form-control @error('password') is-invalid @enderror"
-                                           name="password" required autocomplete="new-password"
-                                           placeholder="Votre mot de passe">
-                                    <button class="btn password-toggle input-group-text" type="button" id="togglePassword">
-                                        <i class="fas fa-eye" id="togglePasswordIcon"></i>
-                                    </button>
-                                </div>
-                                @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label>
-                                <div class="input-group">
-                                    <input id="password_confirmation" type="password" 
-                                           class="form-control @error('password_confirmation') is-invalid @enderror"
-                                           name="password_confirmation" required autocomplete="new-password"
-                                           placeholder="Confirmer le mot de passe">
-                                    <button class="btn password-toggle input-group-text" type="button" id="toggleConfirm">
-                                        <i class="fas fa-eye" id="toggleConfirmIcon"></i>
-                                    </button>
-                                </div>
-                                @error('password_confirmation')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center mt-5">
-                            <a href="{{ route('login') }}" class="link-primary">
-                                <i class="fas fa-arrow-left me-1"></i>
-                                Déjà inscrit ?
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-user-plus me-2"></i>
-                                Créer mon compte
-                            </button>
-                        </div>
-                    </form>
-
-                    <div class="footer-text">
-                        <span>Urban Guard • Phase pilote Cotonou</span>
-                    </div>
+        .footer-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <div class="logo-container">
+                <img src="{{ asset('images/CITINOVA1.png') }}" alt="Logo" class="logo">
+                <div>
+                    <h1 class="register-title">CITINOVA</h1>
+                    <p class="register-subtitle">Système intelligent de veille citoyenne</p>
                 </div>
             </div>
         </div>
 
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="register-body">
+            <!-- Validation Errors -->
+            @if ($errors->any())
+                <div class="alert alert-error">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const departementSelect = document.getElementById('departement-select');
-                const communeSelect = document.getElementById('commune-select');
-                const arrondissementSelect = document.getElementById('arrondissement-select');
-                const quartierSelect = document.getElementById('quartier-select');
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
-                // Toggle password visibility
-                function setupPasswordToggle(passwordId, toggleId, iconId) {
-                    const toggle = document.getElementById(toggleId);
-                    const password = document.getElementById(passwordId);
-                    const icon = document.getElementById(iconId);
-                    
-                    toggle.addEventListener('click', function() {
-                        if (password.type === 'password') {
-                            password.type = 'text';
-                            icon.classList.remove('fa-eye');
-                            icon.classList.add('fa-eye-slash');
-                        } else {
-                            password.type = 'password';
-                            icon.classList.remove('fa-eye-slash');
-                            icon.classList.add('fa-eye');
-                        }
-                    });
-                }
+                <!-- Informations personnelles -->
+                <div class="section-title">Informations personnelles</div>
 
-                setupPasswordToggle('password', 'togglePassword', 'togglePasswordIcon');
-                setupPasswordToggle('password_confirmation', 'toggleConfirm', 'toggleConfirmIcon');
+                <div class="form-group">
+                    <label for="name" class="form-label">Nom complet</label>
+                    <i class="fas fa-user input-icon"></i>
+                    <input id="name" type="text" name="name" class="form-control" value="{{ old('name') }}" required placeholder="Votre nom complet">
+                </div>
 
-                // Charger les communes selon le département
-                departementSelect.addEventListener('change', async () => {
-                    const id = departementSelect.value;
-                    communeSelect.innerHTML = '<option value="">Chargement...</option>';
-                    arrondissementSelect.innerHTML = '<option value="">-- Sélectionner une commune --</option>';
-                    quartierSelect.innerHTML = '<option value="">-- Sélectionner un arrondissement --</option>';
+                <div class="form-group">
+                    <label for="email" class="form-label">Adresse email</label>
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input id="email" type="email" name="email" class="form-control" value="{{ old('email') }}" required placeholder="votre@email.com">
+                </div>
 
-                    if (!id) {
-                        communeSelect.innerHTML = '<option value="">-- Sélectionner un département --</option>';
-                        return;
-                    }
+                <!-- Localisation -->
+                <div class="section-title mt-4">Localisation</div>
 
-                    try {
-                        const response = await fetch(`/api/communes/${id}`);
-                        const data = await response.json();
-                        communeSelect.innerHTML = '<option value="">-- Sélectionner --</option>';
-                        data.forEach(c => {
-                            communeSelect.innerHTML += `<option value="${c.id}">${c.name}</option>`;
-                        });
-                    } catch (error) {
-                        communeSelect.innerHTML = '<option value="">Erreur de chargement</option>';
-                        console.error('Erreur:', error);
-                    }
-                });
+                <div class="form-group">
+                    <label for="departement" class="form-label">Département</label>
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                    <select id="departement-select" name="id_departement" class="form-select" required>
+                        <option value="">-- Sélectionner --</option>
+                        @foreach($departements as $departement)
+                            <option value="{{ $departement->id }}" {{ old('id_departement') == $departement->id ? 'selected' : '' }}>{{ $departement->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-                // Charger les arrondissements selon la commune
-                communeSelect.addEventListener('change', async () => {
-                    const id = communeSelect.value;
-                    arrondissementSelect.innerHTML = '<option value="">Chargement...</option>';
-                    quartierSelect.innerHTML = '<option value="">-- Sélectionner un arrondissement --</option>';
+                <div class="form-group">
+                    <label for="commune" class="form-label">Commune</label>
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                    <select id="commune-select" name="id_commune" class="form-select" required>
+                        <option value="">-- Sélectionner un département --</option>
+                    </select>
+                </div>
 
-                    if (!id) {
-                        arrondissementSelect.innerHTML = '<option value="">-- Sélectionner une commune --</option>';
-                        return;
-                    }
+                <div class="form-group">
+                    <label for="arrondissement" class="form-label">Arrondissement</label>
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                    <select id="arrondissement-select" name="id_arrondissement" class="form-select" required>
+                        <option value="">-- Sélectionner une commune --</option>
+                    </select>
+                </div>
 
-                    try {
-                        const response = await fetch(`/api/arrondissements/${id}`);
-                        const data = await response.json();
-                        arrondissementSelect.innerHTML = '<option value="">-- Sélectionner --</option>';
-                        data.forEach(a => {
-                            arrondissementSelect.innerHTML += `<option value="${a.id}">${a.name}</option>`;
-                        });
-                    } catch (error) {
-                        arrondissementSelect.innerHTML = '<option value="">Erreur de chargement</option>';
-                        console.error('Erreur:', error);
-                    }
-                });
+                <div class="form-group">
+                    <label for="quartier" class="form-label">Quartier</label>
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                    <select id="quartier-select" name="id_quartier" class="form-select" required>
+                        <option value="">-- Sélectionner un arrondissement --</option>
+                    </select>
+                </div>
 
-                // Charger les quartiers selon l'arrondissement
-                arrondissementSelect.addEventListener('change', async () => {
-                    const id = arrondissementSelect.value;
-                    quartierSelect.innerHTML = '<option value="">Chargement...</option>';
+                <div class="form-group">
+                    <label for="rue" class="form-label">Rue</label>
+                    <i class="fas fa-road input-icon"></i>
+                    <input type="text" name="rue" class="form-control" value="{{ old('rue') }}" placeholder="Nom de la rue" required>
+                </div>
 
-                    if (!id) {
-                        quartierSelect.innerHTML = '<option value="">-- Sélectionner un arrondissement --</option>';
-                        return;
-                    }
+                <div class="form-group">
+                    <label for="maison" class="form-label">Maison</label>
+                    <i class="fas fa-home input-icon"></i>
+                    <input type="text" name="maison" class="form-control" value="{{ old('maison') }}" placeholder="Numéro de maison" required>
+                </div>
 
-                    try {
-                        const response = await fetch(`/api/quartiers/${id}`);
-                        const data = await response.json();
-                        quartierSelect.innerHTML = '<option value="">-- Sélectionner --</option>';
-                        data.forEach(q => {
-                            quartierSelect.innerHTML += `<option value="${q.id}">${q.name}</option>`;
-                        });
-                    } catch (error) {
-                        quartierSelect.innerHTML = '<option value="">Erreur de chargement</option>';
-                        console.error('Erreur:', error);
-                    }
-                });
+                <!-- Rôle -->
+                <div class="section-title mt-4">Rôle dans l'administration</div>
+
+                <div class="form-group">
+                    <i class="fas fa-user-tag input-icon"></i>
+                    <select name="role" class="form-select" required>
+                        <option value="">-- Sélectionner votre rôle --</option>
+                        <option value="prefet" {{ old('role')=='prefet'?'selected':'' }}>Préfet</option>
+                        <option value="maire" {{ old('role')=='maire'?'selected':'' }}>Maire</option>
+                        <option value="ca" {{ old('role')=='ca'?'selected':'' }}>Chef d'Arrondissement</option>
+                        <option value="cq" {{ old('role')=='cq'?'selected':'' }}>Chef de Quartier</option>
+                        <option value="conseiller" {{ old('role')=='conseiller'?'selected':'' }}>Conseiller</option>
+                    </select>
+                </div>
+
+                <!-- Sécurité -->
+                <div class="section-title mt-4">Sécurité du compte</div>
+
+                <div class="form-group position-relative">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <i class="fas fa-lock input-icon"></i>
+                    <input id="password" type="password" name="password" class="form-control" required placeholder="Votre mot de passe">
+                    <button type="button" class="password-toggle" onclick="togglePassword('password', this)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+
+                <div class="form-group position-relative">
+                    <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label>
+                    <i class="fas fa-lock input-icon"></i>
+                    <input id="password_confirmation" type="password" name="password_confirmation" class="form-control" required placeholder="Confirmer le mot de passe">
+                    <button type="button" class="password-toggle" onclick="togglePassword('password_confirmation', this)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+
+                <button type="submit" class="btn-register mt-3">
+                    <i class="fas fa-user-plus me-2"></i> Créer mon compte
+                </button>
+
+                <div class="footer-text mt-3">
+                    <a href="{{ route('login') }}" class="link-primary">Déjà inscrit ? Connectez-vous</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(id, btn) {
+            const input = document.getElementById(id);
+            const icon = btn.querySelector('i');
+            if(input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const departementSelect = document.getElementById('departement-select');
+            const communeSelect = document.getElementById('commune-select');
+            const arrondissementSelect = document.getElementById('arrondissement-select');
+            const quartierSelect = document.getElementById('quartier-select');
+
+            departementSelect.addEventListener('change', async () => {
+                const id = departementSelect.value;
+                communeSelect.innerHTML = '<option>Chargement...</option>';
+                arrondissementSelect.innerHTML = '<option>-- Sélectionner une commune --</option>';
+                quartierSelect.innerHTML = '<option>-- Sélectionner un arrondissement --</option>';
+
+                if(!id) { communeSelect.innerHTML='<option>-- Sélectionner un département --</option>'; return; }
+
+                try {
+                    const res = await fetch(`/api/communes/${id}`);
+                    const data = await res.json();
+                    communeSelect.innerHTML='<option value="">-- Sélectionner --</option>';
+                    data.forEach(c => communeSelect.innerHTML += `<option value="${c.id}">${c.name}</option>`);
+                } catch(e) { communeSelect.innerHTML='<option>Erreur de chargement</option>'; }
             });
-        </script>
-    </body>
+
+            communeSelect.addEventListener('change', async () => {
+                const id = communeSelect.value;
+                arrondissementSelect.innerHTML='<option>Chargement...</option>';
+                quartierSelect.innerHTML='<option>-- Sélectionner un arrondissement --</option>';
+                if(!id) { arrondissementSelect.innerHTML='<option>-- Sélectionner une commune --</option>'; return; }
+
+                try {
+                    const res = await fetch(`/api/arrondissements/${id}`);
+                    const data = await res.json();
+                    arrondissementSelect.innerHTML='<option value="">-- Sélectionner --</option>';
+                    data.forEach(a => arrondissementSelect.innerHTML += `<option value="${a.id}">${a.name}</option>`);
+                } catch(e) { arrondissementSelect.innerHTML='<option>Erreur de chargement</option>'; }
+            });
+
+            arrondissementSelect.addEventListener('change', async () => {
+                const id = arrondissementSelect.value;
+                quartierSelect.innerHTML='<option>Chargement...</option>';
+                if(!id) { quartierSelect.innerHTML='<option>-- Sélectionner un arrondissement --</option>'; return; }
+
+                try {
+                    const res = await fetch(`/api/quartiers/${id}`);
+                    const data = await res.json();
+                    quartierSelect.innerHTML='<option value="">-- Sélectionner --</option>';
+                    data.forEach(q => quartierSelect.innerHTML += `<option value="${q.id}">${q.name}</option>`);
+                } catch(e) { quartierSelect.innerHTML='<option>Erreur de chargement</option>'; }
+            });
+        });
+    </script>
+</body>
 </html>
