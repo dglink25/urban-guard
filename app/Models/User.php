@@ -81,6 +81,87 @@ class User extends Authenticatable
         return $this->hasOne(Departement::class, 'id_prefet');
     }
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    // Relation avec les déclarations créées par l'utilisateur
+    public function declarations()
+    {
+        return $this->hasMany(Declaration::class);
+    }
+
+    // Relation avec les déclarations suivies par l'utilisateur
+    public function followedDeclarations()
+    {
+        return $this->belongsToMany(Declaration::class, 'declaration_user')
+                    ->withTimestamps();
+    }
+
+    // Relation avec le département (pour préfet)
+    public function departement()
+    {
+        return $this->belongsTo(Departement::class);
+    }
+
+    // Relation avec la commune (pour maire)
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class);
+    }
+
+    // Relation avec l'arrondissement (pour chef d'arrondissement)
+    public function arrondissement()
+    {
+        return $this->belongsTo(Arrondissement::class);
+    }
+
+    // Vérifie si l'utilisateur suit une déclaration
+    public function followsDeclaration($declarationId){
+        return $this->followedDeclarations()->where('declaration_id', $declarationId)->exists();
+    }
+
+    // Suivre une déclaration
+    public function followDeclaration($declarationId)
+    {
+        if (!$this->followsDeclaration($declarationId)) {
+            $this->followedDeclarations()->attach($declarationId);
+            return true;
+        }
+        return false;
+    }
+
+    // Ne plus suivre une déclaration
+    public function unfollowDeclaration($declarationId)
+    {
+        if ($this->followsDeclaration($declarationId)) {
+            $this->followedDeclarations()->detach($declarationId);
+            return true;
+        }
+        return false;
+    }
+
+    // Méthodes pour vérifier les rôles
+    public function isPrefet()
+    {
+        return $this->role === 'prefet';
+    }
+
+    public function isMaire()
+    {
+        return $this->role === 'maire';
+    }
+
+    public function isChefArrondissement()
+    {
+        return $this->role === 'chef_arrondissement';
+    }
+
+    public function isCitoyen()
+    {
+        return $this->role === 'citoyen';
+    }
+
 
 
 

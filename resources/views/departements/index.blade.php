@@ -13,12 +13,33 @@
         </div>
 
         <!-- MESSAGE DE SUCCÈS (Stylisé) -->
-        @if(session('success'))
-            <div class="bg-green-50 border-l-4 border-green-400 text-green-700 p-4 rounded-lg mb-6 shadow-sm" role="alert">
-                <p class="font-bold">Succès!</p>
-                <p>{{ session('success') }}</p>
+
+        {{-- Messages de succès --}}
+        @if (session('success'))
+            <div class="mb-4 p-4 rounded-lg bg-green-100 text-green-700 border border-green-300">
+                <strong>Succès :</strong> {{ session('success') }}
             </div>
         @endif
+
+        {{-- Messages d'erreur généraux --}}
+        @if (session('error'))
+            <div class="mb-4 p-4 rounded-lg bg-red-100 text-red-700 border border-red-300">
+                <strong>⚠ Erreur :</strong> {{ session('error') }}
+            </div>
+        @endif
+
+        {{-- Erreurs de validation (Laravel) --}}
+        @if ($errors->any())
+            <div class="mb-4 p-4 rounded-lg bg-red-50 border border-red-300 text-red-700">
+                <p class="font-semibold mb-2">Veuillez corriger les erreurs suivantes :</p>
+                <ul class="list-disc list-inside space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
 
         <!-- CONTENEUR DU TABLEAU : Carte Élevée et Débordement Responsif -->
         <div class="bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-100">

@@ -7,6 +7,10 @@
                 ADMINISTRATION
             </div>
 
+            <x-nav-link :href="route('dashboard.declarations')" :active="request()->routeIs('dashboard.*')">
+                {{ __('Tableau de Bord') }}
+            </x-nav-link>
+
             <!-- 🧭 Liens principaux -->
             <div class="hidden sm:flex space-x-6 items-center">
                 @switch(Auth::user()->role)
@@ -25,6 +29,10 @@
                         @break
 
                     @case('prefet')
+
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard.*')">
+                            {{ __('Mon département') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('prefet.communes')" :active="request()->routeIs('prefet.communes')">
                             {{ __('Mes communes') }}
                         </x-nav-link>
@@ -35,6 +43,11 @@
                         @break
 
                     @case('maire')
+
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard.*')">
+                            {{ __('Ma Commune') }}
+                        </x-nav-link>
+
                         <x-nav-link :href="route('maire.arrondissements')" :active="request()->routeIs('maire.arrondissements')">
                             {{ __('Mes arrondissements') }}
                         </x-nav-link>
@@ -45,6 +58,11 @@
                         @break
 
                     @case('chef_arrondissement')
+
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard.*')">
+                            {{ __('Mon Arrondissement') }}
+                        </x-nav-link>
+
                         <x-nav-link :href="route('ca.stats')" :active="request()->routeIs('ca.stats')">
                             {{ __('Statistiques de l\'arrondissement') }}
                         </x-nav-link>

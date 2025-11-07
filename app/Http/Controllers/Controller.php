@@ -7,7 +7,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 
-abstract class Controller extends BaseController
-{
+abstract class Controller extends BaseController{
    
 }

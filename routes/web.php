@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PrefetController;
 use App\Http\Controllers\MaireController;
 use App\Http\Controllers\CAController;
+use App\Http\Controllers\DeclarationController;
 
 
 Route::get('/api/communes/{departement}', function ($departementId) {
@@ -35,6 +36,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/demandes/{user}/reject', [UserValidationController::class, 'reject'])->name('admin.users.reject');
 });
 
+// Route pour le tableau de bord des déclarations
+Route::get('/dashboard/declarations', [DashboardController::class, 'defaut'])->name('dashboard.declarations');
+Route::get('/api/declarations/filter', [DashboardController::class, 'filterDeclarations'])->name('api.declarations.filter');
+Route::patch('/declarations/{declaration}/status', [DeclarationController::class, 'updateStatus'])->name('declarations.updateStatus');
+Route::get('/declarations/{declaration}/details', [DeclarationController::class, 'showDetails'])->name('declarations.details');
 
 Route::get('/', function () {
     return view('welcome');
